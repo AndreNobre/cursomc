@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,13 +25,15 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
+	// omitira os dados da categoria, pois do outro lado da associação (categoria.produto) ja irá traser os dados do produto 
+	// pois ja esta marcado com @JsonManagedReference, para evitar uma "referencia ciclica"
+	@JsonBackReference 
 	@ManyToMany
 	@JoinTable(
 		name= "PRODUTO_CATEGORIA",
 		joinColumns= @JoinColumn(name="produto_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id")
-	)
-	
+	)	
 	private List<Categoria> categorias = new ArrayList<>();
 	
 	public Produto() {		
