@@ -35,21 +35,6 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(obj);		
 	}	
 	
-	/*
-	@RequestMapping(method=RequestMethod.GET)
-	public List<Categoria> listar() {
-		
-		Categoria cat1 = new Categoria(1,"Informática");
-		Categoria cat2 = new Categoria(2,"Escritório");
-		
-		List<Categoria> lista = new ArrayList<>();
-		lista.add(cat1);
-		lista.add(cat2);		
-		
-		return lista;
-	}
-	*/
-	
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
 		Categoria obj = service.fromDTO(objDto);		
@@ -74,7 +59,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}	
 	
-	/*	
+	/*	Jeito antigo antes de mudar para List<CategoriaDTO>
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Categoria>> findAll() {
 		List<Categoria> list = service.findAll();
@@ -88,7 +73,6 @@ public class CategoriaResource {
 		List<CategoriaDTO> listDto = list.stream().map(obj -> new CategoriaDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);		
 	}	
-	
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
 	public ResponseEntity<Page<CategoriaDTO>> findPage(
