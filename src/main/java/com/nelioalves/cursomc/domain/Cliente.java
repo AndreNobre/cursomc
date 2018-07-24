@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class Cliente implements Serializable {
 	//private TipoCliente tipo; 
 	private Integer tipo; // "macete" como o prof. Nelio disse 
 	
-	@OneToMany(mappedBy="cliente")
+	@OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	// "SET" é uma coleção de string associadas ao cliente. O metodo "Set<String>" nao deixa repetir as informações	
